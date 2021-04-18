@@ -4,23 +4,6 @@
 	Each thread prints a message with its id.
 
 	Arguments: Number of threads to be created.
-
-	Functions:
-
-	1. int pthread_create(
-		pthread_t *thread, 					Stores the id of the thread upon successful creation.
-		const pthread_attr_t *attr,			Attributes of thread, if NULL, defaults will be used.
-		void *(*start_routine)(void*),		Thread is created executing start_routine.
-		void *arg);							Arguments of start_routine.
-
-	2. void pthread_exit(void *retval)		Terminates thread
-											If the thread is 'joinable' retval is available to another 
-											thread in the same process that calls pthread_join(void **retval)
-
-	3.int pthread_join(						
-		pthread_t thread, 					The thread to be terminated.
-		void **retval);						The status of the above joinable, terminated thread.
-
 */
 
 #include <pthread.h>
@@ -31,7 +14,7 @@
 void *PrintMessage(void *threadId) {
 
 	int* id = (int*)threadId;
-	
+
 	printf("Thread: %d\n", *id );
 
 	pthread_exit(id);
@@ -52,10 +35,10 @@ int main(int argc, char *argv[]) {
 
 		exit(-1);
 	}
-	
+
 	int maxNumberOfThreads = atoi(argv[1]);
 
-	
+
 	printf("Main: We will create %d for threads that will print hello world.\n", maxNumberOfThreads);
 
 	// Create a thread pointer: points to a 'sequence' or 'array' of threads.
@@ -77,7 +60,7 @@ int main(int argc, char *argv[]) {
    		printf("Main: Creating thread with id: %d\n", i+1);
 
    		threadId[i] = i + 1;
-   		
+
    		int id = pthread_create(&threads[i], NULL, PrintMessage, &threadId[i]);
 
    		// id should be 0

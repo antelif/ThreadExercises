@@ -36,3 +36,5 @@ ________________________________________________________________________________
        The thread to be terminated
     b) void **retval
        The status of the above joinable, terminated thread.
+       Not mandatory, could be NULL, but it helps to locate errors, depending
+       on the code it returns.

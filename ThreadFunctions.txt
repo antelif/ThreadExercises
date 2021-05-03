@@ -1,0 +1,40 @@
+Functions:
+
+1. int pthread_create(
+    pthread_t *thread,
+    const pthread_attr_t *attr,
+    void *(*start_routine)(void*),
+    void *arg);
+
+  Arguments of pthread_create:
+  a) pthread_t *thread
+     Stores the id of the thread upon successful creation.
+  b) const pthread_attr_t *attr
+     Attributes of thread, if NULL, defaults will be used.
+  c) void *(*start_routine)(void*)
+     Thread is created executing start_routine.
+  d) void *arg
+     Arguments of start_routine.
+________________________________________________________________________________
+
+2. void pthread_exit(void *retval)
+   Terminates thread.
+   If the thread is 'joinable' retval is available to another thread in the
+   same process that calls pthread_join(void **retval)
+________________________________________________________________________________
+
+3. int pthread_join(
+    pthread_t thread,
+    void **retval);
+
+    Joins threads.
+    This way all threads wait for other threads to finish their work.
+    Note: Even main() is a thread.
+
+    Arguments of pthread_join:
+    a) pthread_t thread
+       The thread to be terminated
+    b) void **retval
+       The status of the above joinable, terminated thread.
+       Not mandatory, could be NULL, but it helps to locate errors, depending
+       on the code it returns.
